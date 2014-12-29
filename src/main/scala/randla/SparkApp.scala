@@ -2,7 +2,7 @@ package randla
 import org.apache.spark.SparkConf
 import org.apache.spark.SparkContext
 import org.apache.spark.mllib.linalg.distributed.RowMatrix
-import org.apache.spark.mllib.linalg.{Matrices, Vectors}
+import org.apache.spark.mllib.linalg.{Matrix, Matrices, Vectors, Vector}
 import org.apache.spark.rdd.RDD
 
 object SparkApp {
@@ -17,15 +17,17 @@ object SparkApp {
       if (accum >= p)
         return item
     }
-    sys.error(f"this should never happen")
+    sys.error("this should never happen")
   }
-  def get_zero_mat(n: Int, k: Int): Vector [Vector[Double]]={
-    val zero_mat= Vector.fill(n, k)(0.0)
+  def get_zero_mat(n: Int, k: Int): Array [Array[Double]]={
+    val zero_mat= Array.fill(n, k)(0.0)
     return zero_mat
   }
-  def projection_rdd(sc: SparkContext, n: Long, k: Long, q:Double):RDD[scala.collection.immutable.Vector[Double]] = {
-    // create nXk dimensional matrix
-    val zero_matrix = get_zero_mat(n.toInt, k.toInt)
+
+
+  def projection_rdd(sc: SparkContext, n: Long, k: Long, q:Double):RowMatrix = {
+    // create kXn dimensional matrix
+    val zero_matrix = get_zero_mat(k.toInt, n.toInt)
     val zero_rdd = sc.parallelize(zero_matrix)
     val constant = math.sqrt(1.0/k*q)
     val probs = List(q/2,q/2, 1 -q)
@@ -36,9 +38,25 @@ object SparkApp {
 
     //np.random.choice([konstant, -konstant, 0], size=(k,n), p=[q/2, q/2,1-q])
     //val vecs = Vector.fill(n.toInt)(sample(dist))
-    val projection_matrix = zero_rdd.map(_ => Vector.fill(n.toInt)(sample(dist)))
-    return projection_matrix
+    val projection_matrix = zero_rdd.map(_ => Array.fill(n.toInt)(sample(dist))).map(x => Vectors.dense(x))
+    val projMat = new RowMatrix(projection_matrix)
+    return projMat
 
+  }
+  def transpose(m: Array[Array[Double]]): Array[Array[Double]] = {
+    (for {
+      c <- m(0).indices
+    } yield m.map(_(c)) ).toArray
+  }
+
+  def multiply(P: RowMatrix, rows:RDD[Vector]): RowMatrix = {
+    val ma = rows.map(_.toArray).take(rows.count.toInt)
+    val localMat = Matrices.dense( rows.count.toInt,
+      rows.take(1)(0).size,
+      transpose(ma).flatten)
+
+
+    return P.multiply(localMat)
   }
   def main(args: Array[String]) {
     if (args.length != 2) {
@@ -47,7 +65,7 @@ object SparkApp {
     }
     val conf = new SparkConf().setAppName("Randomized LA")
     val sc = new SparkContext(conf)
-    val lowerDim = args(1)
+    val lowerDim = args(1).toInt
 
     // Load and parse the data file.
     val rows = sc.textFile(args(0)).map { line =>
@@ -57,8 +75,10 @@ object SparkApp {
     val mat = new RowMatrix(rows)
     val nrows = mat.numRows()
     val ncols = mat.numCols()
-    val proj_rdd = projection_rdd(sc, nrows, ncols, q=0.1)
-    proj_rdd.collect().foreach(print)
+    val proj_mat = projection_rdd(sc, nrows, lowerDim, q=0.1)
+    val projectedA = multiply(proj_mat, rows)
+    println(projectedA.numRows() + " " +projectedA.numCols())
+    //proj_rdd.collect().foreach(print)
 
     sc.stop()
   }
