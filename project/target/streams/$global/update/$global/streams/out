@@ -5,18 +5,35 @@
 [debug] 	refresh = false
 [debug] resolving dependencies for configuration 'compile'
 [debug] == resolving dependencies for default#randla-build;0.1-SNAPSHOT [compile]
+[debug] == resolving dependencies default#randla-build;0.1-SNAPSHOT->com.eed3si9n#sbt-assembly;0.12.0 [compile->default(compile)]
+[info] Resolving com.eed3si9n#sbt-assembly;0.12.0 ...
+[debug] sbt-chain: Checking cache for: dependency: com.eed3si9n#sbt-assembly;0.12.0 {compile=[default(compile)]}
+[debug] 		tried http://repo.typesafe.com/typesafe/ivy-releases/com.eed3si9n/sbt-assembly/scala_2.10/sbt_0.13/0.12.0/ivys/ivy.xml
+[debug] CLIENT ERROR: Not Found url=http://repo.typesafe.com/typesafe/ivy-releases/com.eed3si9n/sbt-assembly/scala_2.10/sbt_0.13/0.12.0/ivys/ivy.xml
+[debug] 	typesafe-ivy-releases: no ivy file found for com.eed3si9n#sbt-assembly;0.12.0
+[debug] 		tried http://repo.scala-sbt.org/scalasbt/sbt-plugin-releases/com.eed3si9n/sbt-assembly/scala_2.10/sbt_0.13/0.12.0/ivys/ivy.xml
+[debug] 	sbt-plugin-releases: found md file for com.eed3si9n#sbt-assembly;0.12.0
+[debug] 		=> http://repo.scala-sbt.org/scalasbt/sbt-plugin-releases/com.eed3si9n/sbt-assembly/scala_2.10/sbt_0.13/0.12.0/ivys/ivy.xml (0.12.0)
+[debug] downloading http://repo.scala-sbt.org/scalasbt/sbt-plugin-releases/com.eed3si9n/sbt-assembly/scala_2.10/sbt_0.13/0.12.0/ivys/ivy.xml ...
+[debug] 	sbt-plugin-releases: downloading http://repo.scala-sbt.org/scalasbt/sbt-plugin-releases/com.eed3si9n/sbt-assembly/scala_2.10/sbt_0.13/0.12.0/ivys/ivy.xml
+[debug] 	sbt-plugin-releases: downloading http://repo.scala-sbt.org/scalasbt/sbt-plugin-releases/com.eed3si9n/sbt-assembly/scala_2.10/sbt_0.13/0.12.0/ivys/ivy.xml.sha1
+[debug] sha1 OK for http://repo.scala-sbt.org/scalasbt/sbt-plugin-releases/com.eed3si9n/sbt-assembly/scala_2.10/sbt_0.13/0.12.0/ivys/ivy.xml
+[debug] 	[SUCCESSFUL ] com.eed3si9n#sbt-assembly;0.12.0!ivy.xml(ivy.original) (1180ms)
+[debug] 	found com.eed3si9n#sbt-assembly;0.12.0 in sbt-plugin-releases
 [debug] resolving dependencies for configuration 'runtime'
 [debug] == resolving dependencies for default#randla-build;0.1-SNAPSHOT [runtime]
 [debug] == resolving dependencies for default#randla-build;0.1-SNAPSHOT [compile]
+[debug] == resolving dependencies default#randla-build;0.1-SNAPSHOT->com.eed3si9n#sbt-assembly;0.12.0 [compile->default(compile)]
 [debug] resolving dependencies for configuration 'test'
 [debug] == resolving dependencies for default#randla-build;0.1-SNAPSHOT [test]
 [debug] == resolving dependencies for default#randla-build;0.1-SNAPSHOT [runtime]
 [debug] == resolving dependencies for default#randla-build;0.1-SNAPSHOT [compile]
+[debug] == resolving dependencies default#randla-build;0.1-SNAPSHOT->com.eed3si9n#sbt-assembly;0.12.0 [compile->default(compile)]
 [debug] resolving dependencies for configuration 'provided'
 [debug] == resolving dependencies for default#randla-build;0.1-SNAPSHOT [provided]
 [debug] == resolving dependencies default#randla-build;0.1-SNAPSHOT->org.scala-lang#scala-library;2.10.4 [provided->default(compile)]
 [info] Resolving org.scala-lang#scala-library;2.10.4 ...
-[debug] sbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@268399
+[debug] sbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@5124e852
 [debug] sbt-chain: module revision found in cache: org.scala-lang#scala-library;2.10.4
 [debug] 	typesafe-ivy-releases: revision in cache: org.scala-lang#scala-library;2.10.4
 [debug] 	found org.scala-lang#scala-library;2.10.4 in sbt-chain
@@ -574,6 +591,7 @@
 [debug] resolving dependencies for configuration 'compile-internal'
 [debug] == resolving dependencies for default#randla-build;0.1-SNAPSHOT [compile-internal]
 [debug] == resolving dependencies for default#randla-build;0.1-SNAPSHOT [compile]
+[debug] == resolving dependencies default#randla-build;0.1-SNAPSHOT->com.eed3si9n#sbt-assembly;0.12.0 [compile->default(compile)]
 [debug] == resolving dependencies for default#randla-build;0.1-SNAPSHOT [optional]
 [debug] == resolving dependencies for default#randla-build;0.1-SNAPSHOT [provided]
 [debug] == resolving dependencies default#randla-build;0.1-SNAPSHOT->org.scala-lang#scala-library;2.10.4 [provided->default(compile)]
@@ -904,12 +922,14 @@
 [debug] == resolving dependencies for default#randla-build;0.1-SNAPSHOT [runtime-internal]
 [debug] == resolving dependencies for default#randla-build;0.1-SNAPSHOT [runtime]
 [debug] == resolving dependencies for default#randla-build;0.1-SNAPSHOT [compile]
+[debug] == resolving dependencies default#randla-build;0.1-SNAPSHOT->com.eed3si9n#sbt-assembly;0.12.0 [compile->default(compile)]
 [debug] == resolving dependencies for default#randla-build;0.1-SNAPSHOT [optional]
 [debug] resolving dependencies for configuration 'test-internal'
 [debug] == resolving dependencies for default#randla-build;0.1-SNAPSHOT [test-internal]
 [debug] == resolving dependencies for default#randla-build;0.1-SNAPSHOT [test]
 [debug] == resolving dependencies for default#randla-build;0.1-SNAPSHOT [runtime]
 [debug] == resolving dependencies for default#randla-build;0.1-SNAPSHOT [compile]
+[debug] == resolving dependencies default#randla-build;0.1-SNAPSHOT->com.eed3si9n#sbt-assembly;0.12.0 [compile->default(compile)]
 [debug] == resolving dependencies for default#randla-build;0.1-SNAPSHOT [optional]
 [debug] == resolving dependencies for default#randla-build;0.1-SNAPSHOT [provided]
 [debug] == resolving dependencies default#randla-build;0.1-SNAPSHOT->org.scala-lang#scala-library;2.10.4 [provided->default(compile)]
@@ -1289,6 +1309,12 @@
 [debug] == resolving dependencies default#randla-build;0.1-SNAPSHOT->org.scala-lang#scala-library;2.10.4 [scala-tool->optional(default)]
 [debug] 	resolved ivy file produced in cache
 [debug] :: downloading artifacts ::
+[debug] 		tried http://repo.scala-sbt.org/scalasbt/sbt-plugin-releases/com.eed3si9n/sbt-assembly/scala_2.10/sbt_0.13/0.12.0/jars/sbt-assembly.jar
+[info] downloading http://repo.scala-sbt.org/scalasbt/sbt-plugin-releases/com.eed3si9n/sbt-assembly/scala_2.10/sbt_0.13/0.12.0/jars/sbt-assembly.jar ...
+[debug] 	sbt-plugin-releases: downloading http://repo.scala-sbt.org/scalasbt/sbt-plugin-releases/com.eed3si9n/sbt-assembly/scala_2.10/sbt_0.13/0.12.0/jars/sbt-assembly.jar
+[debug] 	sbt-plugin-releases: downloading http://repo.scala-sbt.org/scalasbt/sbt-plugin-releases/com.eed3si9n/sbt-assembly/scala_2.10/sbt_0.13/0.12.0/jars/sbt-assembly.jar.sha1
+[debug] sha1 OK for http://repo.scala-sbt.org/scalasbt/sbt-plugin-releases/com.eed3si9n/sbt-assembly/scala_2.10/sbt_0.13/0.12.0/jars/sbt-assembly.jar
+[info] 	[SUCCESSFUL ] com.eed3si9n#sbt-assembly;0.12.0!sbt-assembly.jar (1889ms)
 [debug] 	[NOT REQUIRED] org.scala-lang#scala-library;2.10.4!scala-library.jar
 [debug] 	[NOT REQUIRED] org.scala-sbt#sbt;0.13.5!sbt.jar
 [debug] 	[NOT REQUIRED] org.scala-sbt#main;0.13.5!main.jar
@@ -1337,7 +1363,7 @@
 [debug] 	[NOT REQUIRED] org.scala-sbt#apply-macro;0.13.5!apply-macro.jar
 [debug] 	[NOT REQUIRED] org.scala-lang#jline;2.10.4!jline.jar
 [debug] 	[NOT REQUIRED] org.fusesource.jansi#jansi;1.4!jansi.jar
-[debug] :: resolution report :: resolve 1269ms :: artifacts dl 22ms
+[debug] :: resolution report :: resolve 3719ms :: artifacts dl 1911ms
 [debug] 	report for default#randla-build;0.1-SNAPSHOT compile produced in /home/mohit/IdeaProjects/RandLA/project/target/resolution-cache/reports/default-randla-build-compile.xml
 [debug] 	report for default#randla-build;0.1-SNAPSHOT runtime produced in /home/mohit/IdeaProjects/RandLA/project/target/resolution-cache/reports/default-randla-build-runtime.xml
 [debug] 	report for default#randla-build;0.1-SNAPSHOT test produced in /home/mohit/IdeaProjects/RandLA/project/target/resolution-cache/reports/default-randla-build-test.xml
@@ -1351,5 +1377,5 @@
 [debug] 	report for default#randla-build;0.1-SNAPSHOT docs produced in /home/mohit/IdeaProjects/RandLA/project/target/resolution-cache/reports/default-randla-build-docs.xml
 [debug] 	report for default#randla-build;0.1-SNAPSHOT pom produced in /home/mohit/IdeaProjects/RandLA/project/target/resolution-cache/reports/default-randla-build-pom.xml
 [debug] 	report for default#randla-build;0.1-SNAPSHOT scala-tool produced in /home/mohit/IdeaProjects/RandLA/project/target/resolution-cache/reports/default-randla-build-scala-tool.xml
-[debug] 	resolve done (1269ms resolve - 22ms download)
+[debug] 	resolve done (3719ms resolve - 1911ms download)
 [info] Done updating.

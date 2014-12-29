@@ -3,6 +3,7 @@ import org.apache.spark.SparkConf
 import org.apache.spark.SparkContext
 import org.apache.spark.mllib.linalg.distributed.RowMatrix
 import org.apache.spark.mllib.linalg.{Matrices, Vectors}
+import org.apache.spark.rdd.RDD
 
 object SparkApp {
 
@@ -22,7 +23,7 @@ object SparkApp {
     val zero_mat= Vector.fill(n, k)(0.0)
     return zero_mat
   }
-  def projection_rdd(sc: SparkContext, n: Long, k: Long, q:Double):Unit = {
+  def projection_rdd(sc: SparkContext, n: Long, k: Long, q:Double):RDD[scala.collection.immutable.Vector[Double]] = {
     // create nXk dimensional matrix
     val zero_matrix = get_zero_mat(n.toInt, k.toInt)
     val zero_rdd = sc.parallelize(zero_matrix)
@@ -34,9 +35,9 @@ object SparkApp {
     //val dist = Map(options(0)-> probs(0), options(1) -> probs(1), options(2)-> probs(2))
 
     //np.random.choice([konstant, -konstant, 0], size=(k,n), p=[q/2, q/2,1-q])
-    val vecs = Vector.fill(n.toInt)(sample(dist))
-
-
+    //val vecs = Vector.fill(n.toInt)(sample(dist))
+    val projection_matrix = zero_rdd.map(_ => Vector.fill(n.toInt)(sample(dist)))
+    return projection_matrix
 
   }
   def main(args: Array[String]) {
@@ -56,7 +57,8 @@ object SparkApp {
     val mat = new RowMatrix(rows)
     val nrows = mat.numRows()
     val ncols = mat.numCols()
-    val proj = projection_rdd(nrows, ncols, q=0.1)
+    val proj_rdd = projection_rdd(sc, nrows, ncols, q=0.1)
+    proj_rdd.collect().foreach(print)
 
     sc.stop()
   }
