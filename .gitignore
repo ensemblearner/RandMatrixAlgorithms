@@ -19,3 +19,7 @@ project/plugins/project/
 # IDEA
 .idea/*
 .target/*
+
+*.xsl
+
+*.css
