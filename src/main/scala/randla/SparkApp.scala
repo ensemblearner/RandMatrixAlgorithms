@@ -77,7 +77,12 @@ object SparkApp {
     val ncols = mat.numCols()
     val proj_mat = projection_rdd(sc, nrows, lowerDim, q=0.1)
     val projectedA = multiply(proj_mat, rows)
-    println(projectedA.numRows() + " " +projectedA.numCols())
+    //println(projectedA.numRows() + " " +projectedA.numCols())
+    //tsqr(sc: SparkContext, numRows: Int, numCols: Int, numParts:Int, numClasses: Int)
+    val numParts = 3
+    val numClasses = 2
+    val r = TSQR.tsqr(sc,rows, nrows.toInt,lowerDim,numParts, numClasses)
+    println(r)
     //proj_rdd.collect().foreach(print)
 
     sc.stop()
