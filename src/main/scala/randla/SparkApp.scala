@@ -4,6 +4,7 @@ import org.apache.spark.SparkContext
 import org.apache.spark.mllib.linalg.distributed.RowMatrix
 import org.apache.spark.mllib.linalg.{Matrix, Matrices, Vectors, Vector}
 import org.apache.spark.rdd.RDD
+import breeze.linalg.qr.QR
 
 object SparkApp {
 
@@ -58,6 +59,7 @@ object SparkApp {
 
     return P.multiply(localMat)
   }
+
   def main(args: Array[String]) {
     if (args.length != 2) {
       System.err.println("Usage: SparkApp <input> <lower_dimension>")
@@ -75,15 +77,12 @@ object SparkApp {
     val mat = new RowMatrix(rows)
     val nrows = mat.numRows()
     val ncols = mat.numCols()
-    val proj_mat = projection_rdd(sc, nrows, lowerDim, q=0.1)
-    val projectedA = multiply(proj_mat, rows)
-    //println(projectedA.numRows() + " " +projectedA.numCols())
-    //tsqr(sc: SparkContext, numRows: Int, numCols: Int, numParts:Int, numClasses: Int)
-    val numParts = 3
-    val numClasses = 2
-    val r = TSQR.tsqr(sc,rows, nrows.toInt,lowerDim,numParts, numClasses)
-    println(r)
-    //proj_rdd.collect().foreach(print)
+    val projection = projection_rdd(sc, nrows, lowerDim, q=0.1)
+    val proj_mat = multiply(projection, rows)
+    //val proj_rows = proj_mat.
+    println(proj_mat.numRows() + " " +proj_mat.numCols())
+    val (_q,_r) = qr_factorization.qr_factor(proj_mat, proj_mat.numRows().toInt, proj_mat.numCols().toInt)
+    println(_r)
 
     sc.stop()
   }
